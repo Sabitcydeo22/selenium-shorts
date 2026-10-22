@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
         },
         features = "src/test/resources/features",
         glue = "com/cydeo/tests/step_definitions",
-        tags = "@webtables",
+        tags = "",
         dryRun = false
 )
 public class CukesRunner {
