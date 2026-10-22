@@ -1,0 +1,33 @@
+name: Automated Selenium Tests
+
+on:
+  schedule:
+    # Ekzekutohet çdo ditë në orën 23:00 UTC
+    - cron: '0 23 * * *'
+  # Mundëson butonin për ta nisur vetë me dorë nga GitHub
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Shkarko kodin nga GitHub
+        uses: actions/checkout@v4
+
+      - name: Konfiguro versionin e Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
+
+      - name: Ekzekuto testet me Maven ne sfond
+        run: mvn clean test -Dbrowser=chrome-headless
+
+      - name: Ruaj raportin e testeve
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-test-reports
+          path: target/
