@@ -44,7 +44,8 @@ public class LibraryLoginPage {
     }
 
     // Merr të gjitha modulet e navigimit në krye të faqes
-    @FindBy(xpath = "//ul[@id='menu_list']//li//span")
+    @FindBy(xpath = "//ul[@id='menu_list']//li//a")
     public java.util.List<WebElement> navigationModules;
 
 }
+

@@ -76,7 +76,7 @@ public class Login_StepDefinitions {
         org.openqa.selenium.support.ui.WebDriverWait wait =
                 new org.openqa.selenium.support.ui.WebDriverWait(Driver.getDriver(), java.time.Duration.ofSeconds(15));
 
-        // Presim derisa lista e moduleve të mos jetë më e zbrazët (madhësia më e madhe se 0)
+        // Presim derisa lista e moduleve të mos jetë bosh
         wait.until(driver -> !loginPage.navigationModules.isEmpty());
 
         // Mbledhim tekstin e secilit modul nga faqja
