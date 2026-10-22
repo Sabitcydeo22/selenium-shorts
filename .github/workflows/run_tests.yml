@@ -23,8 +23,7 @@ jobs:
           cache: 'maven'
 
       - name: Ekzekuto testet me Maven ne sfond
-        run: mvn clean test -Dbrowser=chrome-headless
-
+        run: mvn clean test -Dtest=CukesRunner -Dbrowser=chrome-headless
       - name: Ruaj raportin e testeve
         if: always()
         uses: actions/upload-artifact@v4
