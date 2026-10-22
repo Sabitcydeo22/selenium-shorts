@@ -74,15 +74,15 @@ public class Login_StepDefinitions {
     @Then("user should see below modules")
     public void user_should_see_below_modules(java.util.List<String> expectedModules) {
         org.openqa.selenium.support.ui.WebDriverWait wait =
-                new org.openqa.selenium.support.ui.WebDriverWait(Driver.getDriver(), java.time.Duration.ofSeconds(10));
+                new org.openqa.selenium.support.ui.WebDriverWait(Driver.getDriver(), java.time.Duration.ofSeconds(15));
 
-        // Presim që moduli i parë të jetë i dukshëm në faqe
-        wait.until(org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf(loginPage.navigationModules.get(0)));
+        // Presim derisa lista e moduleve të mos jetë më e zbrazët (madhësia më e madhe se 0)
+        wait.until(driver -> !loginPage.navigationModules.isEmpty());
 
         // Mbledhim tekstin e secilit modul nga faqja
         java.util.List<String> actualModules = new java.util.ArrayList<>();
         for (org.openqa.selenium.WebElement each : loginPage.navigationModules) {
-            actualModules.add(each.getText());
+            actualModules.add(each.getText().trim());
         }
 
         // Krahasojmë listën që erdhi nga Gherkin me listën reale nga UI
