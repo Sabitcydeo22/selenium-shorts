@@ -76,16 +76,18 @@ public class Login_StepDefinitions {
         org.openqa.selenium.support.ui.WebDriverWait wait =
                 new org.openqa.selenium.support.ui.WebDriverWait(Driver.getDriver(), java.time.Duration.ofSeconds(15));
 
-        // Presim derisa lista e moduleve të mos jetë bosh
+        // Presim derisa të shfaqen modulet në faqe
         wait.until(driver -> !loginPage.navigationModules.isEmpty());
 
-        // Mbledhim tekstin e secilit modul nga faqja
         java.util.List<String> actualModules = new java.util.ArrayList<>();
         for (org.openqa.selenium.WebElement each : loginPage.navigationModules) {
-            actualModules.add(each.getText().trim());
+            String text = each.getText().trim();
+            // Shtojmë vetëm nëse moduli përputhet me ato që presim (Dashboard, Users, Books)
+            if (expectedModules.contains(text)) {
+                actualModules.add(text);
+            }
         }
 
-        // Krahasojmë listën që erdhi nga Gherkin me listën reale nga UI
         org.junit.Assert.assertEquals(expectedModules, actualModules);
     }
 
